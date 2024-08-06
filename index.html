@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Creado y Modificando Objetos</title>
+</head>
+
+<body>
+
+
+  <script>
+    /**
+       * Constructor Pacientes
+       * 
+       * nombre, edad, rut, diagnóstico
+       */
+    function Paciente(nombre, edad, rut, diagnostico) {
+      let _nombre = nombre;
+      let _edad = edad;
+      let _rut = rut;
+      let _diagnostico = diagnostico;
+
+      // Con defineProperty
+      Object.defineProperty(this, "_getNombre", {
+        get: function () {
+          return _nombre;
+        }
+      })
+      Object.defineProperty(this, "_setNombre", {
+        set: function (nombre) {
+          _nombre = nombre;
+        }
+      })
+
+      // Con defineProperties
+
+      Object.defineProperties(this, {
+        "_getEdad": {
+          get: function () {
+            return _edad;
+          }
+        },
+        "_setEdad": {
+          set: function (edad) {
+            _edad = edad;
+          }
+        },
+        "_getRut": {
+          get: function () {
+            return _rut;
+          }
+        },
+        "_setRut": {
+          set: function (rut) {
+            _rut = rut;
+          }
+        },
+        "_getDiagnostico": {
+          get: function () {
+            return _diagnostico;
+          }
+        },
+        "_setDiagnostico": {
+          set: function (diagnostico) {
+            _diagnostico = diagnostico;
+          }
+        }
+      })
+    }
+
+    // Accesadores globales
+    Paciente.prototype.getNombre = function(){
+      return this._getNombre;
+    }
+    Paciente.prototype.setNombre = function(nombre){
+      this._setNombre = nombre;
+    }
+    Paciente.prototype.getEdad = function (){
+      return this._getEdad;
+    }
+    Paciente.prototype.setEdad = function (edad){
+      this._setEdad = edad;
+    }
+    Paciente.prototype.getRut = function (){
+      return this._getRut;
+    }
+    Paciente.prototype.setRut = function(rut){
+      this._setRut = rut;
+    }
+    Paciente.prototype._getDiagnostico = function (){
+      return this._getDiagnostico;
+    }
+    Paciente.prototype.setDiagnostico = function (diagnostico){
+      this._setDiagnostico = diagnostico;
+    }
+
+    /**
+     * Costructor de Consultorio 
+    */
+
+    function Consultorio (nombre, paciente){
+      let _nombre = nombre;
+      let _pacientes = [paciente];
+
+      // Getter y Setter para el nombre de Consultorio 
+      Object.defineProperties(this,{
+        "_getNombreConsultorio":{
+          get: function(){
+            return _nombre;
+          }
+        },
+        "_setNombreConsultorio": {
+          set: function(nombre){
+            _nombre = nombre;
+          }
+        },
+
+        // Getter y Setter para pacientes del consultorio
+        "_getPacientes":{
+          get: function(){
+            return _pacientes;
+          }
+        },
+        "_setPacientes":{
+          set: function(paciente){
+            _pacientes.push(paciente);
+          }
+        }
+      })
+    }
+
+    // Accesadores para Consultorio
+    Consultorio.prototype.getNombre = function(){
+      return this._getNombreConsultorio;
+    }
+    Consultorio.prototype.setNombre = function (nombre){
+      this._setNombreConsultorio = nombre;
+    }
+    Consultorio.prototype.getPacientes = function(){
+      return this._getPacientes;
+    }
+    Consultorio.prototype.setPacientes = function(paciente){
+      this._setPacientes = paciente;
+    }
+  </script>
+</body>
+
+</html>
